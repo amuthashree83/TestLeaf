@@ -1,0 +1,115 @@
+package testleaf.care4U.practise;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Xpathpractice16Apr {
+//17th  Apr assignment also merged.
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "\\C:\\Java folder\\chromedriver.exe\\"); 
+
+		WebDriver driver = new ChromeDriver();
+		
+		// opening LEAFTAPS
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(50,TimeUnit.SECONDS);
+		
+		//GIVING CREDENTIALS TO LOGIN in to LEAFTAPS
+		driver.findElement(By.xpath("//input[@name='USERNAME']")).sendKeys("DemoSalesManager"); // driver.findElement(By.id("username")).sendKeys("DemoSalesManager");
+		driver.findElement(By.xpath("//input[@type='password']")).sendKeys("crmsfa"); //driver.findElement(By.id("password")).sendKeys("crmsfa");
+		driver.findElement(By.xpath("//input[@value='Login']")).click(); //driver.findElement(By.className("decorativeSubmit")).click();
+		
+		//CLICKING ON THE CRMSFA button
+	
+		driver.findElement(By.xpath("//a[contains(text(), 'CRM')]")).click();	//		driver.findElement(By.linkText("CRM/SFA")).click(); //clicks CRMSFA button
+		//driver.findElement(By.xpath("//a[contains(@href,'crmsfa')]")).click(); //using xpath to click CRMSFA through href link using contains partial link 
+		                                                                                         
+	
+		//CREATE LEAD ------ CLICKING ON FIND LEADS TAB USING XPATH
+		driver.findElement(By.xpath("//a[contains(@href,'/crmsfa/control/leadsMain')]")).click(); //to click Leads tab //can use xpath using text also "//a[contains(text(),'Leads')]"
+		driver.findElement(By.xpath("//a[contains(text(),'Create Lead')]")).click(); //using xpath to click on Create Lead
+		driver.findElement(By.xpath("//input[@id='createLeadForm_companyName']")).sendKeys("Test Leaf"); //using xpath to click on company name in create lead form
+		//driver.findElement(By.xpath("//input[@id='createLeadForm_parentPartyId']")).sendKeys("9"); removed this line as it is throwing invalid party ID error
+		driver.findElement(By.xpath("//input[@id='createLeadForm_firstName']")).sendKeys("Amutha");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_lastName']")).sendKeys("Venkatachalam");
+		
+		WebElement Sourceelement = driver.findElement(By.xpath("//select[@id='createLeadForm_dataSourceId']"));
+		Select SourceCLDD = new Select(Sourceelement);
+		SourceCLDD.selectByVisibleText("Employee");
+		
+		WebElement Markcampele = driver.findElement(By.xpath("//select[@id='createLeadForm_marketingCampaignId']"));		
+		Select MarkcampDD = new Select(Markcampele);
+		MarkcampDD.selectByValue("CATRQ_AUTOMOBILE");
+		
+		driver.findElement(By.xpath("//input[@id='createLeadForm_firstNameLocal']")).sendKeys("Ammu");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_lastNameLocal']")).sendKeys("Dinchu");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_personalTitle']")).sendKeys("Mrs");
+		driver.findElement(By.xpath("//select[@id='createLeadForm_dataSourceId']")).click();
+		driver.findElement(By.xpath("//input[@id='createLeadForm_birthDate']")).sendKeys("02/20/83");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalProfTitle']")).sendKeys("Dummy Title");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_departmentName']")).sendKeys("Automation Test Deptmt");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_annualRevenue']")).sendKeys("700000"); 
+		
+		WebElement PrefCurrEle = driver.findElement(By.xpath("//select[@id='createLeadForm_currencyUomId']"));
+		Select PredCurrDD = new Select(PrefCurrEle);
+		PredCurrDD.selectByVisibleText("INR - Indian Rupee");
+		
+		WebElement IndusEle = driver.findElement(By.xpath("//select[@id='createLeadForm_industryEnumId']"));
+		Select IndusDD = new Select(IndusEle);
+		IndusDD.selectByIndex(9);
+		
+		driver.findElement(By.xpath("//input[@id='createLeadForm_numberEmployees']")).sendKeys("99");
+		
+		WebElement OwnerEle = driver.findElement(By.xpath("//select[@id='createLeadForm_ownershipEnumId']"));
+		Select OwnerDD = new Select(OwnerEle);
+		OwnerDD.selectByVisibleText("Partnership");
+		
+		driver.findElement(By.xpath("//input[@id='createLeadForm_sicCode']")).sendKeys("SICCODE999"); 
+		driver.findElement(By.xpath("//input[@id='createLeadForm_tickerSymbol']")).sendKeys("TICKSYM"); 
+		driver.findElement(By.xpath("//textarea[@id='createLeadForm_description']")).sendKeys("Dummy description");
+		driver.findElement(By.xpath("//textarea[@id='createLeadForm_importantNote']")).sendKeys("Dummy note");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryPhoneCountryCode']")).sendKeys("91"); 
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryPhoneNumber']")).sendKeys("9999999999");  
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryPhoneAreaCode']")).sendKeys("044");  
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryPhoneAskForName']")).sendKeys("Dinchu askforname");  
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryPhoneExtension']")).sendKeys("51111");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryEmail']")).sendKeys("amuthashree83@gmail.com");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_primaryWebUrl']")).sendKeys("www.gmail.com");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalToName']")).sendKeys("Toname Amutha");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalAttnName']")).sendKeys("Attentionname");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalAddress1']")).sendKeys("3 - C, Coral Enclave");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalAddress2']")).sendKeys("RP Road Nehru Nagar");
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalCity']")).sendKeys("Chennai");
+		
+		WebElement StateEle = driver.findElement(By.xpath("//select[@id='createLeadForm_generalStateProvinceGeoId']"));
+		StateEle.sendKeys("TAMILNADU");
+		
+		driver.findElement(By.xpath("//input[@id='createLeadForm_generalPostalCode']")).sendKeys("600044");
+
+		WebElement CountryEle = driver.findElement(By.xpath("//select[@id='createLeadForm_generalCountryGeoId']"));
+		Select CountryDD = new Select(CountryEle);
+		CountryDD.selectByVisibleText("India");
+			
+		driver.findElement(By.xpath("//input[@class='smallSubmit']")).click();
+		
+		//*********above code creates a lead account*********
+		
+		//now to fetch the account Company Name	Test Leaf (11144)
+		
+		//GOTO LEads and navigate to Find leads again to fetch the created LEAD entry
+		driver.findElement(By.xpath("//a[contains(@href,'/crmsfa/control/leadsMain')]")).click(); 
+		
+		
+		
+		
+		
+		
+	}
+}
