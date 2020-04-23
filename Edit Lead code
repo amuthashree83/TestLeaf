@@ -1,0 +1,38 @@
+package week1.testleaf.homework;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EditLead {
+
+public static void main(String[] args) throws InterruptedException {
+System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+ChromeDriver driver = new ChromeDriver();
+driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+driver.get("http://leaftaps.com/opentaps/control/main");
+driver.manage().window().maximize();
+driver.findElementById("username").sendKeys("DemoSalesManager",Keys.TAB);
+driver.findElementById("password").sendKeys("crmsfa");
+driver.findElementByClassName("decorativeSubmit").click();
+driver.findElementByLinkText("CRM/SFA").click();
+driver.findElementByLinkText("Leads").click();
+driver.findElementByLinkText("Find Leads").click();
+Thread.sleep(2000);
+driver.findElementByXPath("(//input[@name='firstName'])[3]").sendKeys("Ram");
+driver.findElementByXPath("//button[text()='Find Leads']").click();
+Thread.sleep(3000);
+WebElement firstrecord = driver.findElementByXPath("(//div[@class='x-grid3-cell-inner x-grid3-col-partyId'])[1]/a");
+Thread.sleep(3000);
+firstrecord.click(); 
+System.out.println(driver.getTitle());
+driver.findElementByLinkText("Edit").click();
+System.out.println(driver.getTitle());
+driver.findElementById("updateLeadForm_companyName").sendKeys("_Updated"); 
+driver.findElementByName("submitButton").click();
+System.out.println(driver.getTitle());
+System.out.println(driver.findElementById("viewLead_companyName_sp").getText());
+driver.close();
+}
